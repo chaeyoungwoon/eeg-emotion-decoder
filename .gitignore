@@ -1,0 +1,9 @@
+data/GAMEEMO/
+results/metrics/*.npy
+__pycache__/
+*.pyc
+.env
+*.key
+secrets.py
+.DS_Store
+.ipynb_checkpoints/
