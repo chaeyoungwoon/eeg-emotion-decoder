@@ -15,12 +15,12 @@ I am a data science student at UCSD and I want to work on BCI for fully immersiv
 The full system looks like this:
 
 ```
-EEG Headset -> Emotion Classifier -> Generative Narrative Engine -> Adaptive Environment -> User -> EEG Headset -> ...
+EEG Headset -> Emotion Classifier -> Adaptive Environment -> User -> EEG Headset -> ...
 ```
 
-The user wears an EEG headset. The classifier reads brain signals and outputs an emotion state. That state feeds into a generative narrative engine, which produces adaptive content -- story beats, environmental changes, music -- conditioned on what the user is actually feeling. The environment shifts, the user's emotional state changes, the classifier picks that up, and the loop continues.
+The user wears an EEG headset. The classifier reads brain signals and outputs an emotion state. That state drives an adaptive environment conditioned on what the user is actually feeling. The environment shifts, the user's emotional state changes, the classifier picks that up, and the loop continues.
 
-Phase 1 (this repository) is the classifier. Phase 2, currently in development, pipes the classifier output into a Claude API call that generates real-time adaptive story beats conditioned on the detected emotion state.
+Phase 1 (this repository) is the classifier. Phase 2, currently in development, is the neural environment -- a fully local Streamlit interface that responds in real time to the decoded brain state.
 
 ---
 
@@ -135,33 +135,13 @@ SHAP channel importance analysis and EEGNet spatial filter visualizations are in
 
 ---
 
-## Phase 2: Adaptive Narrative Engine (In Development)
+## Phase 2: Neural Environment (In Development)
 
-The second phase of this project connects the classifier to a generative language model. The architecture:
+Two parallel binary EEGNet decoders will classify valence (positive/negative) and arousal (calm/excited) independently from raw EEG. Together they define a position in Russell's 2D circumplex model of emotion. A Streamlit environment responds in real time to the decoded neural state.
 
-```
-EEG stream (live or replay)
-   |
-   v
-Emotion Classifier (Phase 1)
-   |
-   v
-Detected emotion state (one of: boring / calm / horror / funny)
-   |
-   v
-Claude API call with emotion state as context
-   |
-   v
-Generated story beat conditioned on emotional state
-   |
-   v
-Display to user
-   |
-   v
-(user's emotion shifts) -> back to EEG stream
-```
+The aversion zone -- high arousal combined with negative valence -- is the neural signature of threat and discomfort. This is the closest non-invasive software approximation to the concept explored in Sword Art Online: a system that detects not what you do, but what your brain is experiencing. The NerveGear intercepts the brain's own signals. This project decodes them.
 
-The feedback loop is the interesting part. The generated narrative is designed to modulate the user's emotional state -- a calm scene when the classifier detects fear, an escalating scene when it detects boredom. The classifier then picks up the shift, which changes the next generation. This is the core architecture of an emotion-adaptive environment. The goal is not a system that responds to emotion after the fact, but one that participates in a continuous loop with the user's mental state.
+No external APIs. Fully local. The environment responds to brain signals alone.
 
 ---
 
