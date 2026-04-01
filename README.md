@@ -16,7 +16,7 @@ The full system looks like this:
 
 ```
 EEG Headset -> Emotion Classifier -> Generative Narrative Engine -> Adaptive Environment -> User -> EEG Headset -> ...
-```c
+```
 
 The user wears an EEG headset. The classifier reads brain signals and outputs an emotion state. That state feeds into a generative narrative engine, which produces adaptive content -- story beats, environmental changes, music -- conditioned on what the user is actually feeling. The environment shifts, the user's emotional state changes, the classifier picks that up, and the loop continues.
 
@@ -181,7 +181,7 @@ python src/models/baselines.py    # run XGBoost LOSO baselines
 python src/models/eegnet.py       # train EEGNet (MPS-accelerated on Apple Silicon)
 ```
 
-Set `DYLD_DUPLICATE_LIB_OK=TRUE` if you encounter library conflicts on macOS with MPS acceleration.
+Set `KMP_DUPLICATE_LIB_OK=TRUE` if you encounter library conflicts on macOS with MPS acceleration.
 
 ---
 

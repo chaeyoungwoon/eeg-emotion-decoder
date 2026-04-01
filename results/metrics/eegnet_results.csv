@@ -1,0 +1,2 @@
+model,features,acc_mean,acc_std,f1_mean,f1_std,auc_mean,auc_std
+EEGNet,raw,0.5456,0.1805,0.5141,0.2008,0.7959,0.1175
